@@ -1,16 +1,21 @@
 import React from "react";
 
-const EditableProduct = () => (
-  <div class="product">
-    <div class="product-details">
-      <h3>Amazon Kindle E-reader</h3>
-      <p class="price">$79.99</p>
-      <p class="quantity">5 left in stock</p>
-      <div class="actions product-actions">
-        <a class="button add-to-cart">Add to Cart</a>
-        <a class="button edit">Edit</a>
+const EditableProduct = props => (
+  <div className="product">
+    <div className="product-details">
+      <h3>{props.product.title}</h3>
+      <p className="price">${props.product.price}</p>
+      <p className="quantity">{props.product.quantity} left in stock</p>
+      <div className="actions product-actions">
+        <a
+          className="button add-to-cart"
+          onClick={() => props.onAddToCartClick(props.product)}
+        >
+          Add to Cart
+        </a>
+        <a className="button edit">Edit</a>
       </div>
-      <a class="delete-button">
+      <a className="delete-button">
         <span>X</span>
       </a>
     </div>

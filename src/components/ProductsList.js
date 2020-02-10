@@ -1,13 +1,17 @@
 import React from "react";
 import EditableProduct from "./EditableProduct.js";
 
-const ProductsList = () => (
-  <div class="product-listing">
+const ProductsList = props => (
+  <div className="product-listing">
     <h2>Products</h2>
 
-    <EditableProduct />
-    <EditableProduct />
-    <EditableProduct />
+    {props.products.map(product => (
+      <EditableProduct
+        key={product.id}
+        product={product}
+        onAddToCartClick={props.onAddToCartClick}
+      />
+    ))}
   </div>
 );
 

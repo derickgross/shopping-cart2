@@ -1,10 +1,10 @@
 import React from "react";
 import Cart from "./Cart.js";
 
-const Header = () => (
+const Header = props => (
   <header>
     <h1>The Shop!</h1>
-    <Cart />
+    <Cart cart={props.cart} />
   </header>
 );
 
