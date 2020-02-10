@@ -1,10 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Header from "./Header.js";
+import ProductsList from "./ProductsList.js";
+
+/*
+Shop
+  Header
+    Cart
+  ProductsList
+    EditableProduct
+      ProductForm
+  TogglableProductForm
+    AddProductButton
+    ProductForm
+*/
 
 class Shop extends Component {
   render() {
     return (
       <div id="app">
-        <h1>Welcome!</h1>
+        <Header />
+        <main>
+          <ProductsList />
+        </main>
       </div>
     );
   }
