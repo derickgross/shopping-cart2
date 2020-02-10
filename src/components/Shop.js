@@ -27,7 +27,8 @@ class Shop extends Component {
     });
   };
 
-  onAddToCartClick = clickedProduct => {
+  // Refactor this method so it's shorter
+  handleAddToCartClick = clickedProduct => {
     if (
       this.state.cart.find(item => item.productId === clickedProduct.id) ===
       undefined
@@ -50,7 +51,7 @@ class Shop extends Component {
             return {
               ...item,
               quantity: item.quantity + 1,
-              price: item.price + clickedProduct.price
+              price: item.price + clickedProduct.price // Update this - should just compute quantity * price
             };
           } else {
             return item;
@@ -80,7 +81,7 @@ class Shop extends Component {
         <main>
           <ProductsList
             products={this.state.products}
-            onAddToCartClick={this.onAddToCartClick}
+            onAddToCartClick={this.handleAddToCartClick}
           />
         </main>
       </div>
