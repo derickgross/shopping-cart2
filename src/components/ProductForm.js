@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 class ProductForm extends Component {
   state = {
-    title: this.props.product.title,
-    price: this.props.product.price,
-    quantity: this.props.product.quantity
+    title: this.props.product.title || '',
+    price: this.props.product.price || '',
+    quantity: this.props.product.quantity || ''
   };
 
   handleInput = e => {
@@ -26,7 +26,7 @@ class ProductForm extends Component {
       })
       .then(() => {
         this.setState({
-          name: "",
+          title: "",
           price: "",
           quantity: ""
         });
