@@ -24,6 +24,8 @@ class TogglableProductForm extends Component {
       <ProductForm
         onToggleForm={this.handleToggleForm}
         onAddNewProduct={this.props.onAddNewProduct}
+        formType="Add"
+        product={{}}
       />
     ) : (
       <p>

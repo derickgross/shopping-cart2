@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 class ProductForm extends Component {
   state = {
-    name: "",
-    price: "",
-    quantity: ""
+    title: this.props.product.title,
+    price: this.props.product.price,
+    quantity: this.props.product.quantity
   };
 
   handleInput = e => {
@@ -20,7 +20,7 @@ class ProductForm extends Component {
   handleAddNewProduct = e => {
     this.props
       .onAddNewProduct({
-        title: this.state.name,
+        title: this.state.title,
         price: Number(this.state.price),
         quantity: Number(this.state.quantity)
       })
@@ -36,7 +36,7 @@ class ProductForm extends Component {
   render() {
     return (
       <div className="add-form visible">
-        <h3>Add Product</h3>
+        <h3>{this.props.formType} Product</h3>
         <form>
           <div className="input-group">
             <label htmlFor="product-name">Product Name</label>
@@ -44,8 +44,8 @@ class ProductForm extends Component {
               type="text"
               id="product-name"
               onChange={this.handleInput}
-              name="name"
-              value={this.state.name}
+              name="title"
+              value={this.state.title}
             />
           </div>
 

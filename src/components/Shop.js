@@ -45,6 +45,7 @@ class Shop extends Component {
     });
   };
 
+
   // Refactor this method so it's shorter
   handleAddToCartClick = clickedProduct => {
     if (
