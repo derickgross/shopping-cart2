@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "./Header.js";
 import ProductsList from "./ProductsList.js";
-import TogglableProductForm from "./TogglableProductForm.js"
+import TogglableProductForm from "./TogglableProductForm.js";
 import productsData from "../lib/products.js";
-import client from '../lib/client.js'
+import client from "../lib/client.js";
 
 /*
 Shop
@@ -20,18 +20,30 @@ Shop
 class Shop extends Component {
   state = {
     products: [],
-    cart: [],
+    cart: []
   };
 
   componentDidMount = () => {
-    client.get("/api/products")
-          .then(data => this.setState({products: data}));
+    client.get("/api/products").then(data => this.setState({ products: data }));
   };
 
   handleAddNewProduct = newProduct => {
-    console.log('handleAddNewProduct');
-    client.post("/api/products", newProduct);
-  }
+    return new Promise(resolve => {
+      client
+        .post("/api/products", newProduct)
+        .then(newProduct => {
+          // this.forceUpdate();
+          this.setState(prevState => ({
+            products: prevState.products.concat(newProduct)
+          }));
+
+          resolve();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  };
 
   // Refactor this method so it's shorter
   handleAddToCartClick = clickedProduct => {
@@ -89,7 +101,7 @@ class Shop extends Component {
             products={this.state.products}
             onAddToCartClick={this.handleAddToCartClick}
           />
-          <TogglableProductForm onAddNewProduct={this.handleAddNewProduct}/>
+          <TogglableProductForm onAddNewProduct={this.handleAddNewProduct} />
         </main>
       </div>
     );
