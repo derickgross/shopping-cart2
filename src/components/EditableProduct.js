@@ -31,8 +31,17 @@ class EditableProduct extends Component {
           ) : (
             <div className="actions product-actions">
               <a
-                className="button add-to-cart"
-                onClick={() => this.props.onAddToCartClick(this.props.product)}
+                // className="button add-to-cart"
+                className={
+                  this.props.product.quantity > 0
+                    ? "button add-to-cart"
+                    : "button add-to-cart disabled"
+                }
+                onClick={
+                  this.props.product.quantity > 0
+                    ? () => this.props.onAddToCartClick(this.props.product)
+                    : undefined
+                }
               >
                 Add to Cart
               </a>

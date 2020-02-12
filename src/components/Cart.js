@@ -9,7 +9,7 @@ const Cart = props => (
         <p>Total: $0</p>
       </div>
     ) : (
-      <table class="cart-items">
+      <table className="cart-items">
         <tr>
           <th>Item</th>
           <th>Quantity</th>
@@ -17,21 +17,30 @@ const Cart = props => (
         </tr>
 
         {props.cart.map(item => (
-          <tr>
+          <tr key={item.id}>
             <td>{item.name}</td>
             <td>{item.quantity}</td>
-            <td>${item.price}</td>
+            <td>${item.price.toFixed(2)}</td>
           </tr>
         ))}
 
         <tr>
-          <td colspan="3" class="total">
-            Total: ${props.cart.reduce((total, item) => total + item.price, 0)}
+          <td colspan="3" className="total">
+            Total: $
+            {props.cart
+              .reduce((total, item) => total + item.price, 0)
+              .toFixed(2)}
           </td>
         </tr>
       </table>
     )}
-    <a className="button checkout disabled">Checkout</a>
+    <a
+      className={
+        props.cart.length > 0 ? "button checkout" : "button checkout disabled"
+      }
+    >
+      Checkout
+    </a>
   </div>
 );
 

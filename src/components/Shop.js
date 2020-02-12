@@ -90,14 +90,13 @@ class Shop extends Component {
   // Refactor this method so it's shorter
   handleAddToCartClick = clickedProduct => {
     if (
-      this.state.cart.find(item => item.productId === clickedProduct.id) ===
-      undefined
+      this.state.cart.find(item => item.id === clickedProduct.id) === undefined
     ) {
       this.setState({
         cart: [
           ...this.state.cart,
           {
-            productId: clickedProduct.id,
+            id: clickedProduct.id,
             name: clickedProduct.title,
             quantity: 1,
             price: clickedProduct.price
@@ -107,7 +106,7 @@ class Shop extends Component {
     } else {
       this.setState({
         cart: this.state.cart.map(item => {
-          if (item.productId === clickedProduct.id) {
+          if (item.id === clickedProduct.id) {
             return {
               ...item,
               quantity: item.quantity + 1,
