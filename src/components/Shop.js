@@ -133,10 +133,16 @@ class Shop extends Component {
     });
   };
 
+  handleCheckout = () => {
+    this.setState({
+      cart: []
+    });
+  };
+
   render() {
     return (
       <div id="app">
-        <Header cart={this.state.cart} />
+        <Header cart={this.state.cart} onCheckout={this.handleCheckout} />
         <main>
           <ProductsList
             products={this.state.products}

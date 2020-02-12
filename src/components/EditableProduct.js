@@ -16,7 +16,13 @@ class EditableProduct extends Component {
         <div className="product-details">
           <h3>{this.props.product.title}</h3>
           <p className="price">${this.props.product.price}</p>
-          <p className="quantity">
+          <p
+            className={
+              this.props.product.quantity > 0
+                ? "quantity"
+                : "quantity none-left"
+            }
+          >
             {this.props.product.quantity} left in stock
           </p>
 

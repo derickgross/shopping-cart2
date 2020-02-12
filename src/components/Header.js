@@ -4,7 +4,7 @@ import Cart from "./Cart.js";
 const Header = props => (
   <header>
     <h1>The Shop!</h1>
-    <Cart cart={props.cart} />
+    <Cart cart={props.cart} onCheckout={props.onCheckout} />
   </header>
 );
 

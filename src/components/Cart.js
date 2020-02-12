@@ -38,6 +38,7 @@ const Cart = props => (
       className={
         props.cart.length > 0 ? "button checkout" : "button checkout disabled"
       }
+      onClick={() => props.onCheckout()}
     >
       Checkout
     </a>
