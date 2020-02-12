@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { uuid } from "uuidv4";
 
 let uuid1 = uuid();
 
@@ -120,7 +120,7 @@ client.put(`/api/products/${uuid1}`, {title: 'Book Reader'})
 
 client.delete(`/api/products/${uuid1}`)
       .then(() => {
-        
+
       });
 */
 

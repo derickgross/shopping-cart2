@@ -10,6 +10,8 @@ const ProductsList = props => (
         key={product.id}
         product={product}
         onAddToCartClick={props.onAddToCartClick}
+        onUpdateProduct={props.onUpdateProduct}
+        onDeleteProduct={props.onDeleteProduct}
       />
     ))}
   </div>

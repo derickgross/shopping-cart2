@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
 class ProductForm extends Component {
+  // Possibly move form pre-population to within componentDidMount
+
   state = {
-    title: this.props.product.title || '',
-    price: this.props.product.price || '',
-    quantity: this.props.product.quantity || ''
+    title: this.props.product.title || "",
+    price: this.props.product.price || "",
+    quantity: this.props.product.quantity || ""
   };
 
   handleInput = e => {
@@ -13,8 +15,8 @@ class ProductForm extends Component {
     });
   };
 
-  handleToggleForm = e => {
-    this.props.onToggleForm(e);
+  handleToggleForm = () => {
+    this.props.onToggleForm();
   };
 
   handleAddNewProduct = e => {
@@ -31,6 +33,17 @@ class ProductForm extends Component {
           quantity: ""
         });
       });
+  };
+
+  handleUpdateProduct = e => {
+    this.props
+      .onUpdateProduct({
+        id: this.props.product.id,
+        title: this.state.title,
+        price: Number(this.state.price),
+        quantity: Number(this.state.quantity)
+      })
+      .then(this.handleToggleForm());
   };
 
   render() {
@@ -72,8 +85,15 @@ class ProductForm extends Component {
           </div>
 
           <div className="actions form-actions">
-            <a className="button" onClick={this.handleAddNewProduct}>
-              Add
+            <a
+              className="button"
+              onClick={
+                this.props.formType === "Add"
+                  ? this.handleAddNewProduct
+                  : this.handleUpdateProduct
+              }
+            >
+              {this.props.formType === "Add" ? "Add" : "Update"}
             </a>
             <a className="button" onClick={this.handleToggleForm}>
               Cancel

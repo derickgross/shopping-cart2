@@ -45,6 +45,47 @@ class Shop extends Component {
     });
   };
 
+  handleUpdateProduct = updatedProduct => {
+    return new Promise(resolve => {
+      client
+        .put(`/api/products/${updatedProduct.id}`, updatedProduct)
+        .then(updatedProduct => {
+          this.setState(prevState => ({
+            products: prevState.products.map(product => {
+              if (product.id === updatedProduct.id) {
+                return updatedProduct;
+              } else {
+                return product;
+              }
+            })
+          }));
+
+          resolve();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  };
+
+  handleDeleteProduct = productId => {
+    return new Promise(resolve => {
+      client
+        .delete(`/api/products/${productId}`)
+
+        .then(() => {
+          this.setState(prevState => ({
+            products: prevState.products.filter(p => p.id !== productId)
+          }));
+
+          resolve();
+        })
+
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  };
 
   // Refactor this method so it's shorter
   handleAddToCartClick = clickedProduct => {
@@ -101,6 +142,8 @@ class Shop extends Component {
           <ProductsList
             products={this.state.products}
             onAddToCartClick={this.handleAddToCartClick}
+            onUpdateProduct={this.handleUpdateProduct}
+            onDeleteProduct={this.handleDeleteProduct}
           />
           <TogglableProductForm onAddNewProduct={this.handleAddNewProduct} />
         </main>
