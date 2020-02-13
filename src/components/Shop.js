@@ -27,24 +27,6 @@ class Shop extends Component {
     client.get("/api/products").then(data => this.setState({ products: data }));
   };
 
-  handleAddNewProduct = newProduct => {
-    return new Promise(resolve => {
-      client
-        .post("/api/products", newProduct)
-        .then(newProduct => {
-          // this.forceUpdate();
-          this.setState(prevState => ({
-            products: prevState.products.concat(newProduct)
-          }));
-
-          resolve();
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    });
-  };
-
   handleUpdateProduct = updatedProduct => {
     return new Promise(resolve => {
       client
@@ -150,7 +132,7 @@ class Shop extends Component {
             onUpdateProduct={this.handleUpdateProduct}
             onDeleteProduct={this.handleDeleteProduct}
           />
-          <TogglableProductForm onAddNewProduct={this.handleAddNewProduct} />
+          <TogglableProductForm />
         </main>
       </div>
     );

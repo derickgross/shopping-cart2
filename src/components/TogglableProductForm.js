@@ -23,7 +23,6 @@ class TogglableProductForm extends Component {
     return this.state.visible ? (
       <ProductForm
         onToggleForm={this.handleToggleForm}
-        onAddNewProduct={this.props.onAddNewProduct}
         formType="Add"
         product={{}}
       />

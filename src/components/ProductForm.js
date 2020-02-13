@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import store from '../lib/store';
+import client from '../lib/client';
 
 class ProductForm extends Component {
   // Possibly move form pre-population to within componentDidMount
@@ -7,6 +9,10 @@ class ProductForm extends Component {
     title: this.props.product.title || "",
     price: this.props.product.price || "",
     quantity: this.props.product.quantity || ""
+  };
+
+  handleAddNewProduct = newProduct => {
+
   };
 
   handleInput = e => {
@@ -20,31 +26,49 @@ class ProductForm extends Component {
   };
 
   handleAddNewProduct = e => {
-    this.props
-      .onAddNewProduct({
-        title: this.state.title,
-        price: Number(this.state.price),
-        quantity: Number(this.state.quantity)
-      })
-      .then(() => {
-        this.setState({
-          title: "",
-          price: "",
-          quantity: ""
+    const newProduct = {
+      title: this.state.title,
+      price: Number(this.state.price),
+      quantity: Number(this.state.quantity)
+    };
+
+    return new Promise(resolve => {
+      client
+        .post("/api/products", newProduct)
+        .then(newProduct => {
+          // this.forceUpdate();
+
+          store.dispatch({
+            type: 'PRODUCT_CREATED',
+            payload: {
+              newProduct: newProduct;
+            }
+          })
+
+          this.setState({
+            title: "",
+            price: "",
+            quantity: ""
+          });
+
+          resolve();
+        })
+        .catch(error => {
+          console.log(error);
         });
-      });
+    })
   };
 
-  handleUpdateProduct = e => {
-    this.props
-      .onUpdateProduct({
-        id: this.props.product.id,
-        title: this.state.title,
-        price: Number(this.state.price),
-        quantity: Number(this.state.quantity)
-      })
-      .then(this.handleToggleForm());
-  };
+  // handleUpdateProduct = e => {
+  //   this.props
+  //     .onUpdateProduct({
+  //       id: this.props.product.id,
+  //       title: this.state.title,
+  //       price: Number(this.state.price),
+  //       quantity: Number(this.state.quantity)
+  //     })
+  //     .then(this.handleToggleForm());
+  // };
 
   render() {
     return (
