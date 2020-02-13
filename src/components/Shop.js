@@ -50,24 +50,6 @@ class Shop extends Component {
     });
   };
 
-  handleDeleteProduct = productId => {
-    return new Promise(resolve => {
-      client
-        .delete(`/api/products/${productId}`)
-
-        .then(() => {
-          this.setState(prevState => ({
-            products: prevState.products.filter(p => p.id !== productId)
-          }));
-
-          resolve();
-        })
-
-        .catch(error => {
-          console.log(error);
-        });
-    });
-  };
 
   // Refactor this method so it's shorter
   handleAddToCartClick = clickedProduct => {
@@ -129,8 +111,6 @@ class Shop extends Component {
           <ProductsList
             products={this.state.products}
             onAddToCartClick={this.handleAddToCartClick}
-            onUpdateProduct={this.handleUpdateProduct}
-            onDeleteProduct={this.handleDeleteProduct}
           />
           <TogglableProductForm />
         </main>

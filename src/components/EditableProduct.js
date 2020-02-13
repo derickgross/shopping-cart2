@@ -1,10 +1,34 @@
 import React, { Component } from "react";
 import ProductForm from "./ProductForm.js";
+import store from '../lib/store';
+import client from '../lib/client';
 
 class EditableProduct extends Component {
   state = {
     formOpen: false
   };
+
+  handleDeleteProduct = (id) => {
+    return new Promise(resolve => {
+      client
+        .delete(`/api/products/${id}`)
+
+        .then(() => {
+          store.dispatch({
+            type: 'PRODUCT_DELETED',
+            payload: {
+              id: id,
+            }
+          })
+
+          resolve();
+        })
+
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  }
 
   handleToggleForm = () => {
     this.setState(prevState => ({ formOpen: !prevState.formOpen }));
@@ -29,8 +53,6 @@ class EditableProduct extends Component {
           {this.state.formOpen ? (
             <ProductForm
               onToggleForm={this.handleToggleForm}
-              onAddNewProduct={this.props.onAddNewProduct}
-              onUpdateProduct={this.props.onUpdateProduct}
               formType="Edit"
               product={this.props.product}
             />
@@ -64,8 +86,8 @@ class EditableProduct extends Component {
 
           <a
             className="delete-button"
-            onClick={() => this.props.onDeleteProduct(this.props.product.id)}
-          >
+            onClick={() => this.handleDeleteProduct(this.props.product.id)}
+          > 
             <span>X</span>
           </a>
         </div>

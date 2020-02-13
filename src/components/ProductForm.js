@@ -11,10 +11,6 @@ class ProductForm extends Component {
     quantity: this.props.product.quantity || ""
   };
 
-  handleAddNewProduct = newProduct => {
-
-  };
-
   handleInput = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -41,7 +37,7 @@ class ProductForm extends Component {
           store.dispatch({
             type: 'PRODUCT_CREATED',
             payload: {
-              newProduct: newProduct;
+              newProduct: newProduct,
             }
           })
 
@@ -59,16 +55,35 @@ class ProductForm extends Component {
     })
   };
 
-  // handleUpdateProduct = e => {
-  //   this.props
-  //     .onUpdateProduct({
-  //       id: this.props.product.id,
-  //       title: this.state.title,
-  //       price: Number(this.state.price),
-  //       quantity: Number(this.state.quantity)
-  //     })
-  //     .then(this.handleToggleForm());
-  // };
+
+  handleUpdateProduct = _ => {
+    const updatedProduct = {
+      id: this.props.product.id,
+      title: this.state.title,
+      price: Number(this.state.price),
+      quantity: Number(this.state.quantity),
+    };
+
+    return new Promise(resolve => {
+      client
+        .put(`/api/products/${updatedProduct.id}`, updatedProduct)
+        .then(updatedProduct => {
+          store.dispatch({
+            type: 'PRODUCT_UPDATED',
+            payload: {
+              updatedProduct: updatedProduct,
+            }
+          });
+
+          this.handleToggleForm();
+
+          resolve();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  };
 
   render() {
     return (

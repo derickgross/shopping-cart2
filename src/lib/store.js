@@ -3,4 +3,4 @@ import products from './reducers/products'
 
 const store = createStore(products);
 
-default export store;
+export default store;
