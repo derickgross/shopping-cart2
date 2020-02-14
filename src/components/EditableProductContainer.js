@@ -35,13 +35,6 @@ const mapDispatchToProps = (dispatch) => {
             quantity: clickedProduct.quantity - 1,
           })
           .then((newlyAddedProduct) => {
-            // dispatch({
-            //   type: 'PRODUCT_UPDATED',
-            //   payload: {
-            //     updatedProduct,
-            //   },
-            // });
-
             dispatch({
               type: 'PRODUCT_ADDED_TO_CART',
               payload: {

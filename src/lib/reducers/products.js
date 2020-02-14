@@ -22,16 +22,6 @@ const products = (state = [], action) => {
 
         return product;
       });
-    // return state.map((product) => {
-    //   if (product.id === action.payload.product.id) {
-    //     return {
-    //       ...product,
-    //       quantity: product.quantity - 1,
-    //     };
-    //   } else {
-    //     return product;
-    //   }
-    // });
   }
 
   return state;
