@@ -75,7 +75,7 @@ class ProductForm extends Component {
             }
           });
 
-          this.handleToggleForm();
+          this.props.onToggleForm();
 
           resolve();
         })
@@ -134,7 +134,7 @@ class ProductForm extends Component {
             >
               {this.props.formType === "Add" ? "Add" : "Update"}
             </a>
-            <a className="button" onClick={this.handleToggleForm}>
+            <a className="button" onClick={() => this.props.onToggleForm() }>
               Cancel
             </a>
           </div>
