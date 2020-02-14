@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import store from '../lib/store';
-import client from '../lib/client';
+import store from "../lib/store";
+import client from "../lib/client";
 
 class ProductForm extends Component {
   // Possibly move form pre-population to within componentDidMount
@@ -35,11 +35,11 @@ class ProductForm extends Component {
           // this.forceUpdate();
 
           store.dispatch({
-            type: 'PRODUCT_CREATED',
+            type: "PRODUCT_CREATED",
             payload: {
-              newProduct: newProduct,
+              newProduct: newProduct
             }
-          })
+          });
 
           this.setState({
             title: "",
@@ -52,16 +52,15 @@ class ProductForm extends Component {
         .catch(error => {
           console.log(error);
         });
-    })
+    });
   };
-
 
   handleUpdateProduct = _ => {
     const updatedProduct = {
       id: this.props.product.id,
       title: this.state.title,
       price: Number(this.state.price),
-      quantity: Number(this.state.quantity),
+      quantity: Number(this.state.quantity)
     };
 
     return new Promise(resolve => {
@@ -69,9 +68,9 @@ class ProductForm extends Component {
         .put(`/api/products/${updatedProduct.id}`, updatedProduct)
         .then(updatedProduct => {
           store.dispatch({
-            type: 'PRODUCT_UPDATED',
+            type: "PRODUCT_UPDATED",
             payload: {
-              updatedProduct: updatedProduct,
+              updatedProduct: updatedProduct
             }
           });
 
