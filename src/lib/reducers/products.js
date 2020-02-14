@@ -14,6 +14,24 @@ const products = (state = [], action) => {
       });
     case 'PRODUCT_DELETED':
       return state.filter((product) => product.id !== action.payload.id);
+    case 'PRODUCT_ADDED_TO_CART':
+      return state.map((product) => {
+        if (product.id === action.payload.newlyAddedProduct.id) {
+          return action.payload.newlyAddedProduct;
+        }
+
+        return product;
+      });
+    // return state.map((product) => {
+    //   if (product.id === action.payload.product.id) {
+    //     return {
+    //       ...product,
+    //       quantity: product.quantity - 1,
+    //     };
+    //   } else {
+    //     return product;
+    //   }
+    // });
   }
 
   return state;

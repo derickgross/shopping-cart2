@@ -27,24 +27,25 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     handleAddToCartClick: (clickedProduct) => {
+      console.log('hi');
       return new Promise((resolve) => {
         client
           .put(`/api/products/${clickedProduct.id}`, {
             ...clickedProduct,
             quantity: clickedProduct.quantity - 1,
           })
-          .then((updatedProduct) => {
-            dispatch({
-              type: 'PRODUCT_UPDATED',
-              payload: {
-                updatedProduct,
-              },
-            });
+          .then((newlyAddedProduct) => {
+            // dispatch({
+            //   type: 'PRODUCT_UPDATED',
+            //   payload: {
+            //     updatedProduct,
+            //   },
+            // });
 
             dispatch({
               type: 'PRODUCT_ADDED_TO_CART',
               payload: {
-                product: clickedProduct,
+                newlyAddedProduct,
               },
             });
 
