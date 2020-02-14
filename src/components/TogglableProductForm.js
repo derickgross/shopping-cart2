@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ProductForm from "./ProductForm";
+import React, { Component } from 'react';
+import ProductFormContainer from './ProductFormContainer';
 
 /*
 - handlers
@@ -8,28 +8,28 @@ import ProductForm from "./ProductForm";
 
 class TogglableProductForm extends Component {
   state = {
-    visible: false
+    visible: false,
   };
 
-  handleToggleForm = e => {
-    this.setState(prevState => {
+  handleToggleForm = (e) => {
+    this.setState((prevState) => {
       return {
-        visible: !prevState.visible
+        visible: !prevState.visible,
       };
     });
   };
 
   render() {
     return this.state.visible ? (
-      <ProductForm
+      <ProductFormContainer
         onToggleForm={this.handleToggleForm}
-        formType="Add"
+        formType='Add'
         product={{}}
       />
     ) : (
       <p>
         <a
-          className="button add-product-button"
+          className='button add-product-button'
           onClick={this.handleToggleForm}
         >
           Add A Product

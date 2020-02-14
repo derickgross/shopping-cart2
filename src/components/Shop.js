@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from './Header.js';
-import ProductsList from './ProductsList.js';
+import ProductsListContainer from './ProductsListContainer.js';
 import TogglableProductForm from './TogglableProductForm.js';
-import client from '../lib/client.js';
 
 /*
 Shop
@@ -20,7 +19,7 @@ const Shop = () => (
   <div id='app'>
     <Header />
     <main>
-      <ProductsList />
+      <ProductsListContainer />
       <TogglableProductForm />
     </main>
   </div>

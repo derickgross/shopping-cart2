@@ -1,42 +1,9 @@
 import React, { Component } from 'react';
-import ProductForm from './ProductForm.js';
-import store from '../lib/store';
-import client from '../lib/client';
+import ProductFormContainer from './ProductFormContainer.js';
 
 class EditableProduct extends Component {
   state = {
     formOpen: false,
-  };
-
-  handleDeleteProduct = (id) => {
-    return new Promise((resolve) => {
-      client
-        .delete(`/api/products/${id}`)
-
-        .then(() => {
-          store.dispatch({
-            type: 'PRODUCT_DELETED',
-            payload: {
-              id: id,
-            },
-          });
-
-          resolve();
-        })
-
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  };
-
-  handleAddToCartClick = (clickedProduct) => {
-    store.dispatch({
-      type: 'PRODUCT_ADDED_TO_CART',
-      payload: {
-        product: clickedProduct,
-      },
-    });
   };
 
   handleToggleForm = () => {
@@ -60,7 +27,7 @@ class EditableProduct extends Component {
           </p>
 
           {this.state.formOpen ? (
-            <ProductForm
+            <ProductFormContainer
               onToggleForm={this.handleToggleForm}
               formType='Edit'
               product={this.props.product}
@@ -75,7 +42,7 @@ class EditableProduct extends Component {
                 }
                 onClick={
                   this.props.product.quantity > 0
-                    ? () => this.handleAddToCartClick(this.props.product)
+                    ? () => this.props.handleAddToCartClick(this.props.product)
                     : undefined
                 }
               >
@@ -94,7 +61,9 @@ class EditableProduct extends Component {
 
           <a
             className='delete-button'
-            onClick={() => this.handleDeleteProduct(this.props.product.id)}
+            onClick={() =>
+              this.props.handleDeleteProduct(this.props.product.id)
+            }
           >
             <span>X</span>
           </a>

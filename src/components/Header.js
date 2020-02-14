@@ -1,10 +1,10 @@
-import React from "react";
-import Cart from "./Cart.js";
+import React from 'react';
+import CartContainer from './CartContainer';
 
-const Header = props => (
+const Header = () => (
   <header>
     <h1>The Shop!</h1>
-    <Cart />
+    <CartContainer />
   </header>
 );
 
