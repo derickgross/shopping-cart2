@@ -27,7 +27,6 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     handleAddToCartClick: (clickedProduct) => {
-      console.log('hi');
       return new Promise((resolve) => {
         client
           .put(`/api/products/${clickedProduct.id}`, {
